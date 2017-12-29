@@ -22,7 +22,7 @@ stresser
 
 The options are:
 ```
-Usage: stresser <URL> [options]
+    Usage: stresser <URL> [options]
 
     Options:
         -h | --help
@@ -39,6 +39,9 @@ Usage: stresser <URL> [options]
 
         -m | --method <GET|HEAD|POST|PUT|DELETE|*> [GET]
             Sets the request method
+
+        -b | --body <JSON> []
+            Sets the JSON body for request
 
         -f | --force
             Forces the stress test to stop at the requested time even if requests have not finished
@@ -66,10 +69,11 @@ ___
 ## Reading the stats
 _Example:_
 ```
-  S=    10 |   T=    96 |   A=     0
-  E=     0 | T/O=    96 | W/B=     0 | AVG=     0 | MIN=     0 | MAX=     0
-1xx=     0 | 2xx=     0 | 3xx=     0 | 4xx=     0 | 5xx=     0
-NOT FINISHED=4
+Second:     6 | Completed: 320 | Active:     0
+Failed:   160 | Timeout:     0 | W/B:        0
+Min:     2004 | Max:      2196 | Avg:     2012
+Http code :
+1xx=        0 | 2xx=         0 | 3xx=          0 | 4xx=           0 | 5xx=            0
 ```
 
 ### Legend:

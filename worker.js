@@ -58,7 +58,7 @@ let config = null;
 
 const SETUP = (data) => {
     config = data;
-    console.log(config);
+
     requestOptions = {
         url: config.url,
         method: config.method,
