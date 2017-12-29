@@ -97,7 +97,7 @@ const _doSingleRequest = (idx) => {
 
     const req = _requests[idx];
     req.start = Date.now();
-    console.log(requestOptions)
+
     request(requestOptions, (err, http, data) => {
         _requestCount--;
 
