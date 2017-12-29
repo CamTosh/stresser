@@ -11,9 +11,11 @@ const display = (filePath, data, output, seconds, url) => {
     file = file.replace('\'%%TIMES%%\'', JSON.stringify(data.filter(r => !!r.code).map(r => r.time)));
 
     file = file.replace('\'%%SECONDS%%\'', JSON.stringify(seconds));
-    file = file.replace('%%OUTPUT%%', output.split('\n').map(str => `<h3>${str}</h3>`).join('\n'));
+    //file = file.replace('%%OUTPUT%%', output.split('\n').map(str => `<h3>${str}</h3>`).join('\n'));
+    file = file.replace('%%OUTPUT%%', output);
 
     file = file.replace('%%URL%%', url);
+    file = file.replace('%%LINK%%', "'"+url+"'");
 
     try {
         fs.writeFileSync(filePath, file);

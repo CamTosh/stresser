@@ -58,10 +58,12 @@ let config = null;
 
 const SETUP = (data) => {
     config = data;
+    console.log(config);
     requestOptions = {
         url: config.url,
         method: config.method,
-        timeout: config.timeout
+        timeout: config.timeout,
+        form: config.body
     };
     concurrent = config.concurrentPerCPU;
 };
@@ -95,7 +97,7 @@ const _doSingleRequest = (idx) => {
 
     const req = _requests[idx];
     req.start = Date.now();
-
+    console.log(requestOptions)
     request(requestOptions, (err, http, data) => {
         _requestCount--;
 
@@ -128,7 +130,6 @@ const _doSingleRequest = (idx) => {
 
         _statsForSecond.code[req.code.toString()[0]]++;
         config.verbose.c && console.log('HTTP:', req.code);
-
         config.verbose.b && console.log('BODY:', data);
 
         req.body = data.toString().trim().length ? 1 : 0;

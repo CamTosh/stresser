@@ -119,17 +119,18 @@ const _secondHistory = [];
 
 const printStats = (stats, finish) => {
     let str = (
-        `  S=${pad(6, _second)} |   T=${pad(6, stats.cnt + stats.to + stats.err)} | A=${pad(6, _requestCountActive)}
-  E=${pad(6, stats.err)} | T/O=${pad(6, stats.to)} | \
-W/B=${pad(6, stats.body)} | AVG=${pad(6, (stats.time / stats.cnt) | 0)} | MIN=${pad(6, stats.min)} | MAX=${pad(6, stats.max)}
-${range(1, 6).map(code => `${code}xx=${pad(6, stats.code[code.toString()])}`).join(' | ')}
-`);
+        `
+        Second:${pad(6, _second)} | Completed:${pad(4, stats.cnt + stats.to + stats.err)} | Active:${pad(6, _requestCountActive)}
+        Failed:${pad(6, stats.err)} | Timeout:${pad(6, stats.to)} | W/B:${pad(9, stats.body)}
+        Min:${pad(9, stats.min)} | Max:${pad(10, stats.max)} | Avg:${pad(9, (stats.time / stats.cnt) | 0)}
+        Http code : 
+        ${range(1, 6).map(code => `${code}xx=${pad(8+code, stats.code[code.toString()])}`).join(' | ')}
+    `);
 
     const howManyReq = config.concurrentPerCPU * config.CPUs * config.count;
     const howManyDone = stats.cnt + stats.err + stats.to;
     if (finish && howManyDone < howManyReq) {
-        str += `NOT FINISHED=${pad(6, howManyReq - howManyDone)}
-`;
+        str += `NOT FINISHED:=${pad(6, howManyReq - howManyDone)}`;
     }
 
     console.error(str);
